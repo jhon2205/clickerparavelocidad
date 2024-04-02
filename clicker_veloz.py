@@ -48,6 +48,10 @@ for i in range (numero_tarjetas):
     x= x+100
 
 while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
     for eti in etiquetas:
         eti.dibujar(0,30)
 
