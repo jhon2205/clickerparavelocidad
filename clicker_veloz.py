@@ -23,6 +23,8 @@ class Rectangulo():
         pygame.draw.rect(ventana, self.colorDeRelleno,self.rect)
     def bordear(self,colorBorde,anchoDelBorde):
         pygame.draw.rect(ventana,colorBorde,self.rect,anchoDelBorde)
+    def estaClickeando(self,x,y):
+        return self.rect.collidepoint(x,y)
 
 class Etiqueta(Rectangulo):
     def cambiar_texto(self,texto,tamanioFuente,colorTexto):
@@ -36,6 +38,8 @@ AMARILLO = (255,255,0)
 AZUL_OSCURO = (0,0,100)
 AZUL = (80,80,255)
 NEGRO = (0,0,0)
+VERDE = (0,255,0)
+ROJO = (255,0,0)
 etiquetas = []
 
 numero_tarjetas = 4
@@ -57,6 +61,16 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button ==1:
+            x,y = event.pos
+            for i in range(0,numero_tarjetas):
+                if etiquetas[i].estaClickeando(x,y):
+                    if (i+1) == click:
+                         etiquetas[i].cambiarColor(VERDE)
+                    else:
+                        etiquetas[i].cambiarColor(ROJO)
+                    etiquetas[i].rellenar()
+            
     if esperar == 0:
         esperar = 20
         click = randint(1,numero_tarjetas)
@@ -69,7 +83,7 @@ while True:
     else:
         esperar = esperar - 1
 
-
+    
 
     pygame.display.update()
     clock.tick(40)
