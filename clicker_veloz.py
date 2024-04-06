@@ -8,7 +8,7 @@ ventana = pygame.display.set_mode((500,500))
 ventana.fill(color_fondo)
 
 clock = pygame.time.Clock()
-
+pygame.display.set_caption("Clicker Veloz")
 #rectangulo
 
 class Rectangulo():
